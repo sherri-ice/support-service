@@ -1,14 +1,26 @@
-name: Python Lint
+name: Lint
 
-on: [pull_request]
+on:
+  push:
+    paths:
+      - '*.py'
 
 jobs:
-  lint:
-
+  flake8_py3:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v1
-    - uses: ricardochaves/python-lint@test
-      with:
-        use-flake8: true
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7.4
+          architecture: x64
+      - name: Checkout PyTorch
+        uses: actions/checkout@master
+      - name: Install flake8
+        run: pip install flake8
+      - name: Run flake8
+        uses: suo/flake8-github-action@releases/v1
+        with:
+          checkName: 'flake8_py3'  
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
