@@ -3,7 +3,7 @@ from django.db import models
 
 class Message(models.Model):
     text = models.TextField()
-    media_url = models.URLField()
+    media_url = models.URLField(blank=True)
     send_date = models.DateTimeField(auto_now_add=True)
     ticket_id = models.ForeignKey('Ticket', related_name="messages",
                                   on_delete=models.CASCADE)
@@ -23,6 +23,7 @@ class Ticket(models.Model):
 
     title = models.CharField(max_length=255)
     body_text = models.TextField()
+    media_url = models.URLField(blank=True)
     status = models.IntegerField(choices=Status.STATUS_CHOICES,
                                  default=Status.ACTIVE)
     creation_date = models.DateTimeField(auto_now_add=True)
