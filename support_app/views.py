@@ -1,8 +1,8 @@
 from rest_framework import generics
-from .models import Message
-from .serialisers import MessageSerializer
+from .models import Ticket
+from .serialisers import TicketSerializer
 
 
-class MessageListApiView(generics.ListAPIView):
-    queryset = Message.objects.all()
-    serializer_class = MessageSerializer
+class TicketListAPIView(generics.ListAPIView):
+    queryset = Ticket.objects.all()
+    serializer_class = TicketSerializer

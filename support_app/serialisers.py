@@ -1,14 +1,17 @@
 from rest_framework import serializers
-from .models import Message
+from .models import Ticket
 
 
-class MessageSerializer(serializers.Serializer):
+class TicketSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
-    text = serializers.CharField()
+    title = serializers.CharField()
+    body_text = serializers.CharField()
+    status = serializers.CharField()
+    creation_date = serializers.DateTimeField(read_only=True)
+    last_edited_date = serializers.DateTimeField(read_only=True)
     media_url = serializers.URLField()
-    send_date = serializers.DateTimeField(read_only=True)
-    ticket = serializers.ReadOnlyField(source='ticket.id')
+    owner = serializers.ReadOnlyField(source='owner.id')
 
     class Meta:
-        model = Message
-        fields = ('id', 'send_date', 'ticket', 'text', 'media_url')
+        model = Ticket
+        fields = '__all__'

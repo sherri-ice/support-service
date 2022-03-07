@@ -19,5 +19,5 @@ from support_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('messages/', views.MessageListApiView.as_view(), name='messages')
+    path('tickets/', views.TicketListAPIView.as_view(), name='tickets')
 ]

@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
+from django.utils.translation import gettext_lazy
 
 
 class UserManager(BaseUserManager):
@@ -53,21 +54,16 @@ class Message(models.Model):
 
 
 class Ticket(models.Model):
-    class Status:
-        ACTIVE = 1
-        FROZEN = 2
-        CLOSED = 3
-        STATUS_CHOICES = (
-            (ACTIVE, 'Active'),
-            (FROZEN, 'Frozen'),
-            (CLOSED, 'Closed'),
-        )
+    class Statuses(models.TextChoices):
+        ACTIVE = 'AC', gettext_lazy('Active')
+        FROZEN = 'FR', gettext_lazy('Frozen')
+        CLOSED = 'CL', gettext_lazy('Closed')
 
     title = models.CharField(max_length=255)
     body_text = models.TextField()
     media_url = models.URLField(blank=True)
-    status = models.IntegerField(choices=Status.STATUS_CHOICES,
-                                 default=Status.ACTIVE)
+    status = models.CharField(max_length=2, choices=Statuses.choices,
+                              default=Statuses.ACTIVE)
     creation_date = models.DateTimeField(auto_now_add=True)
     last_edited_date = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey('User', related_name='tickets',
