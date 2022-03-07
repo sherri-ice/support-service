@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'support_app.apps.SupportAppConfig',
-    'user_handler_app.apps.UserHandlerAppConfig',
     'rest_framework'
 ]
 
@@ -124,3 +123,6 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'support_app.User'
+
