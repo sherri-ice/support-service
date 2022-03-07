@@ -20,7 +20,7 @@ class Ticket(models.Model):
 
     title = models.CharField(max_length=255)
     body_text = models.TextField()
-    media_url = models.URLField(blank=True)
+    media_url = models.URLField(blank=True, null=True)
     status = models.CharField(max_length=2, choices=Statuses.choices,
                               default=Statuses.ACTIVE)
     creation_date = models.DateTimeField(auto_now_add=True)

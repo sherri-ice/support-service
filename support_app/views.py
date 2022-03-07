@@ -16,3 +16,4 @@ class TicketAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = TicketSerializer
     # permission_classes = [IsAdminUser, IsOwner]
     permission_classes = [AllowAny, ]
+
