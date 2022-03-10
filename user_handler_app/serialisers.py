@@ -1,5 +1,11 @@
+from django.contrib.auth import authenticate
 from rest_framework import serializers
+from rest_framework_simplejwt import exceptions
+from rest_framework_simplejwt.settings import api_settings
+from django.contrib.auth.models import update_last_login
+
 from .models import User
+from rest_framework_simplejwt.serializers import TokenObtainSerializer
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
