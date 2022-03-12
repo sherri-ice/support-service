@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views import RegisterAPIView, UserViewSet
 
 router = routers.SimpleRouter()
-router.register(r'users', UserViewSet)
+router.register(r'users', UserViewSet, basename='users')
 
 app_name = 'auth'
 urlpatterns = [
