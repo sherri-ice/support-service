@@ -3,12 +3,7 @@ from .models import Ticket
 from django.utils.translation import gettext_lazy as _
 
 
-class AdminTicketSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Ticket
-        fields = ['id', 'title', 'body_text', 'owner', 'status']
-        read_only_fields = ['id', 'owner']
-
+class AbstractTicketSerializer(serializers.ModelSerializer):
     @staticmethod
     def validate(data):
         status = data.get('status', None)
@@ -25,6 +20,15 @@ class AdminTicketSerializer(serializers.ModelSerializer):
         return instance
 
 
-class CommonUserTicketSerializer(AdminTicketSerializer):
+class AdminTicketSerializer(AbstractTicketSerializer):
     class Meta:
+        model = Ticket
+        fields = ['id', 'title', 'body_text', 'owner', 'status']
+        read_only_fields = ['id', 'owner']
+
+
+class CommonUserTicketSerializer(AbstractTicketSerializer):
+    class Meta:
+        model = Ticket
+        fields = ['id', 'title', 'body_text', 'owner', 'status']
         read_only_fields = ['id', 'owner', 'status']
