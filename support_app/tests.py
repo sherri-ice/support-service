@@ -6,7 +6,7 @@ from support_app.models import Ticket
 
 
 # TODO: write token auth word
-# from support_service.settings import SIMPLE_JWT
+# from support_site.settings import SIMPLE_JWT
 
 class TicketsAPITests(APITestCase):
 
