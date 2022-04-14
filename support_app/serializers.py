@@ -1,18 +1,27 @@
 from rest_framework import serializers
-from .models import Ticket
+from .models import Ticket, Message
 from django.utils.translation import gettext_lazy as _
 
 
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ['id', 'text', 'send_date']
+
+
 class AbstractTicketSerializer(serializers.ModelSerializer):
-    @staticmethod
-    def validate(data):
-        status = data.get('status', None)
+    class Meta:
+        model = Ticket
+        messages = MessageSerializer(many=True)
+
+    def validate(self, attrs):
+        status = attrs.get('status', None)
         if status and status not in Ticket.Statuses:
             raise serializers.ValidationError(
                 {'status': _(f'Invalid status: {status}')},
                 code='invalid',
             )
-        return data
+        return super().validate(attrs)
 
     def create(self, validated_data):
         instance = self.Meta.model(**validated_data)
@@ -21,14 +30,18 @@ class AbstractTicketSerializer(serializers.ModelSerializer):
 
 
 class AdminTicketSerializer(AbstractTicketSerializer):
+    messages = MessageSerializer(many=True, source="ticket_messages")
+
     class Meta:
         model = Ticket
-        fields = ['id', 'title', 'body_text', 'owner', 'status']
+        fields = ['id', 'title', 'body_text', 'owner', 'status', 'messages']
         read_only_fields = ['id', 'owner']
 
 
 class CommonUserTicketSerializer(AbstractTicketSerializer):
+    messages = MessageSerializer(many=True, source="ticket_messages")
+
     class Meta:
         model = Ticket
-        fields = ['id', 'title', 'body_text', 'owner', 'status']
+        fields = ['id', 'title', 'body_text', 'owner', 'status', 'messages']
         read_only_fields = ['id', 'owner', 'status']

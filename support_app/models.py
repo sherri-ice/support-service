@@ -6,9 +6,9 @@ class Message(models.Model):
     text = models.TextField()
     media_url = models.URLField(blank=True)
     send_date = models.DateTimeField(auto_now_add=True)
-    ticket = models.ForeignKey('Ticket', related_name="messages",
+    ticket = models.ForeignKey('Ticket', related_name="ticket_messages",
                                on_delete=models.CASCADE)
-    owner = models.ForeignKey('user_handler_app.User', related_name='messages',
+    owner = models.ForeignKey('user_handler_app.User', related_name='owner_messages',
                               on_delete=models.CASCADE)
 
 
