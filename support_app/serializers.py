@@ -6,7 +6,8 @@ from django.utils.translation import gettext_lazy as _
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
-        fields = ['id', 'text', 'send_date']
+        fields = ['id', 'text']
+        read_only_fields = ['send_date']
 
 
 class AbstractTicketSerializer(serializers.ModelSerializer):

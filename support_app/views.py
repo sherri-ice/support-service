@@ -1,6 +1,6 @@
 from rest_framework import generics
 from .models import Ticket, Message
-from .serializers import AdminTicketSerializer, CommonUserTicketSerializer
+from .serializers import AdminTicketSerializer, CommonUserTicketSerializer, MessageSerializer
 from .permissions import IsOwnerOrAdmin
 from rest_framework.permissions import IsAuthenticated
 
@@ -28,3 +28,12 @@ class ListCreateTicketAPIView(generics.ListCreateAPIView):
         if user.is_staff:
             return Ticket.objects.all()
         return Ticket.objects.filter(owner=user)
+
+
+class AddMessageToTicketView(generics.CreateAPIView):
+    serializer_class = MessageSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        ticket = Ticket.objects.get(id=self.kwargs['pk'])
+        serializer.save(owner=self.request.user, ticket=ticket)

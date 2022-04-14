@@ -1,10 +1,13 @@
 from django.urls import path
-from .views import RetrieveUpdateDestroyTicketAPIView, ListCreateTicketAPIView
+from .views import RetrieveUpdateDestroyTicketAPIView, ListCreateTicketAPIView, \
+    AddMessageToTicketView
 
 urlpatterns = [
     path('tickets/', ListCreateTicketAPIView.as_view(), name='tickets'),
     path('tickets/<int:pk>/', RetrieveUpdateDestroyTicketAPIView.as_view(),
          name='ticket'),
     path('tickets/add/', ListCreateTicketAPIView.as_view(),
-         name='create_ticket')
+         name='create_ticket'),
+    path('tickets/<int:pk>/new_message/', AddMessageToTicketView.as_view(),
+         name='add_new_message_to_ticket')
 ]
