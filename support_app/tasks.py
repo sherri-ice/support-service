@@ -1,6 +1,6 @@
 from support_site.celery import app
 from django.core.mail import send_mail
-from support_site.settings import EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
+from support_site.settings import EMAIL_HOST_USER
 from .utils import get_prepared_email, EmailType
 
 

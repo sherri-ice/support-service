@@ -5,9 +5,6 @@ from user_handler_app.models import User
 from support_app.models import Ticket
 
 
-# TODO: write token auth word
-# from support_site.settings import SIMPLE_JWT
-
 class TicketsAPITests(APITestCase):
 
     def setUp(self):
@@ -83,7 +80,3 @@ class TicketsAPITests(APITestCase):
 
         # Admin can change status of the ticket
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    # ? get tickets last status by id
-    # change ticket status by id
-    # reply to ticket

@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.viewsets import ModelViewSet
-from .serialisers import RegistrationSerializer, UserSerializer
+from .serializers import RegistrationSerializer, UserSerializer
 
 from .models import User
 

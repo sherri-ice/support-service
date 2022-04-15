@@ -1,13 +1,11 @@
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Ticket
 from .serializers import AdminTicketSerializer, CommonUserTicketSerializer, \
     MessageSerializer
 from .permissions import AdminOrOwnerReadOnly
-from rest_framework.permissions import IsAuthenticated
-
 from .tasks import send_email
-
 from .utils import EmailType
 
 

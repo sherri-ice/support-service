@@ -56,6 +56,3 @@ class UserTests(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer  ' + "abc")
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-
-        # TODO: logout
-

@@ -13,5 +13,6 @@ prepared_mails = {
     EmailType.TICKET_NEW_MESSAGE: 'Your ticket (id: {}) has new support answer: {}'
 }
 
+
 def get_prepared_email(email_type: EmailType, *args):
     return prepared_mails[email_type].format(*args)
