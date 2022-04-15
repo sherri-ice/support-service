@@ -1,4 +1,4 @@
-name: Lint
+name: flake8
 
 on:
   push:
