@@ -31,18 +31,20 @@ class AbstractTicketSerializer(serializers.ModelSerializer):
 
 
 class AdminTicketSerializer(AbstractTicketSerializer):
-    messages = MessageSerializer(many=True, source="ticket_messages")
+    messages = MessageSerializer(many=True, source="ticket_messages",
+                                 read_only=True)
 
     class Meta:
         model = Ticket
         fields = ['id', 'title', 'body_text', 'owner', 'status', 'messages']
-        read_only_fields = ['id', 'owner']
+        extra_kwargs = {"owner": {"required": False, "allow_null": True}}
 
 
 class CommonUserTicketSerializer(AbstractTicketSerializer):
-    messages = MessageSerializer(many=True, source="ticket_messages")
+    messages = MessageSerializer(many=True, source="ticket_messages",
+                                 read_only=True)
 
     class Meta:
         model = Ticket
         fields = ['id', 'title', 'body_text', 'owner', 'status', 'messages']
-        read_only_fields = ['id', 'owner', 'status']
+        extra_kwargs = {"owner": {"required": False, "allow_null": True}}
