@@ -1,4 +1,7 @@
 # InnowiseTask
+
+[![Docker Image CI](https://github.com/sherri-ice/support-service/actions/workflows/docker-image.yml/badge.svg)](https://github.com/sherri-ice/support-service/actions/workflows/docker-image.yml)
+
 ## About
 REST API for ticket-support application with DRF. 
 
