@@ -6,9 +6,9 @@ class Message(models.Model):
     text = models.TextField()
     media_url = models.URLField(blank=True)
     send_date = models.DateTimeField(auto_now_add=True)
-    ticket = models.ForeignKey('Ticket', related_name="messages",
+    ticket = models.ForeignKey('Ticket', related_name="ticket_messages",
                                on_delete=models.CASCADE)
-    owner = models.ForeignKey('user_handler_app.User', related_name='messages',
+    owner = models.ForeignKey('user_handler_app.User', related_name='owner_messages',
                               on_delete=models.CASCADE)
 
 
@@ -20,7 +20,7 @@ class Ticket(models.Model):
 
     title = models.CharField(max_length=255)
     body_text = models.TextField()
-    media_url = models.URLField(blank=True)
+    media_url = models.URLField(blank=True, null=True)
     status = models.CharField(max_length=2, choices=Statuses.choices,
                               default=Statuses.ACTIVE)
     creation_date = models.DateTimeField(auto_now_add=True)

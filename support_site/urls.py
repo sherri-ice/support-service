@@ -15,10 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from support_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/tickets/', views.TicketListAPIView.as_view(), name='tickets'),
-    path('api/', include('user_handler_app.urls', namespace='auth'))
+    path('api/', include('user_handler_app.urls', namespace='auth')),
+    path('api/', include('support_app.urls'))
 ]
